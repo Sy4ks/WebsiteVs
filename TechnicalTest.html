@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      My Website
+    </title>
+  </head>
+  <body> 
+
+    <h1>
+      Technical Test Code
+    </h1>
+
+    <p>
+      Please input two numbers you wish to add or subtract:
+    </p>
+    
+    <form>
+      <label for="number1">Number 1:</label>
+      <input type="number" id='Value1' name="number1"><br>
+      
+      <label for="number2">Number 2:</label>
+      <input type="number" id='Value2' name="number2"><br>
+    </form>
+
+    <button onclick="Addnumbers()">
+      Add
+    </button>
+
+    <button onclick="Subnumbers()">
+      Subtract
+    </button>
+
+    <p>Result: <span id="result"></span></p>
+
+    <script>
+      async function Addnumbers(){
+        let num1 =parseFloat(document.getElementById("Value1").value) || 0;
+        let num2 =parseFloat(document.getElementById("Value2").value) || 0;
+
+        const body = new URLSearchParams();
+        body.append("num1", num1);
+        body.append("num2", num2);
+        
+        const res = await fetch ('http://localhost:3000/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: body.toString()
+        });
+        const data = await res.json();
+        document.getElementById("result").textContent = data.result;
+      }
+      async function Subnumbers(){
+        let num1 =parseFloat(document.getElementById("Value1").value) || 0;
+        let num2 =parseFloat(document.getElementById("Value2").value) || 0;
+
+        const body = new URLSearchParams();
+        body.append("num1", num1);
+        body.append("num2", num2);
+
+        const res = await fetch ('http://localhost:3000/subtract', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: body.toString()
+        });
+        const data = await res.json();
+        document.getElementById("result").textContent = data.result;
+      }
+    </script>
+
+  </body>
+</html>
