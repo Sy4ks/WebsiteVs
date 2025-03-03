@@ -1,4 +1,4 @@
-# GovTechAssesment
+# WebsiteVs
 This repository contains the assessment code, developed using JavaScript, HTML, and Node.js.
 
 Important Notes
